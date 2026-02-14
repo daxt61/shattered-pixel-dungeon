@@ -76,6 +76,7 @@ public class TitleScene extends PixelScene {
 	private StyledButton btnChanges;
 	private StyledButton btnSettings;
 	private StyledButton btnAbout;
+	private StyledButton btnPreview;
 
 	private BitmapText version;
 	private IconButton btnFade;
@@ -212,6 +213,15 @@ public class TitleScene extends PixelScene {
 		};
 		btnAbout.icon(Icons.get(Icons.SHPX));
 		add(btnAbout);
+
+		btnPreview = new StyledButton(GREY_TR, "Dungeon Preview"){
+			@Override
+			protected void onClick() {
+				ShatteredPixelDungeon.switchNoFade( DungeonPreviewScene.class );
+			}
+		};
+		btnPreview.icon(Icons.get(Icons.INFO));
+		add(btnPreview);
 		
 		final int BTN_HEIGHT = 20;
 		int GAP = (int)(h - topRegion - (landscape() ? 3 : 4)*BTN_HEIGHT)/3;
@@ -227,19 +237,21 @@ public class TitleScene extends PixelScene {
 			btnRankings.setRect(btnPlay.left(), btnPlay.bottom()+ GAP, (float) (Math.floor(buttonAreaWidth/3f)-1), BTN_HEIGHT);
 			btnJournal.setRect(btnRankings.right()+2, btnRankings.top(), btnRankings.width(), BTN_HEIGHT);
 			btnNews.setRect(btnJournal.right()+2, btnJournal.top(), btnRankings.width(), BTN_HEIGHT);
-			btnSettings.setRect(btnRankings.left(), btnRankings.bottom() + GAP, btnRankings.width(), BTN_HEIGHT);
-			btnChanges.setRect(btnSettings.right()+2, btnSettings.top(), btnRankings.width(), BTN_HEIGHT);
-			btnAbout.setRect(btnChanges.right()+2, btnSettings.top(), btnRankings.width(), BTN_HEIGHT);
+			btnSettings.setRect(btnRankings.left(), btnRankings.bottom() + GAP, (float) (Math.floor(buttonAreaWidth/4f)-1), BTN_HEIGHT);
+			btnChanges.setRect(btnSettings.right()+2, btnSettings.top(), btnSettings.width(), BTN_HEIGHT);
+			btnAbout.setRect(btnChanges.right()+2, btnSettings.top(), btnSettings.width(), BTN_HEIGHT);
+			btnPreview.setRect(btnAbout.right()+2, btnSettings.top(), btnSettings.width(), BTN_HEIGHT);
 		} else {
 			btnPlay.setRect(btnAreaLeft, insets.top + topRegion+GAP, buttonAreaWidth, BTN_HEIGHT);
 			align(btnPlay);
 			btnSupport.setRect(btnPlay.left(), btnPlay.bottom()+ GAP, btnPlay.width(), BTN_HEIGHT);
 			btnRankings.setRect(btnPlay.left(), btnSupport.bottom()+ GAP, (btnPlay.width()/2)-1, BTN_HEIGHT);
 			btnJournal.setRect(btnRankings.right()+2, btnRankings.top(), btnRankings.width(), BTN_HEIGHT);
-			btnNews.setRect(btnRankings.left(), btnRankings.bottom()+ GAP, btnRankings.width(), BTN_HEIGHT);
+			btnNews.setRect(btnRankings.left(), btnRankings.bottom()+ GAP, (btnPlay.width()/2)-1, BTN_HEIGHT);
 			btnChanges.setRect(btnNews.right()+2, btnNews.top(), btnNews.width(), BTN_HEIGHT);
-			btnSettings.setRect(btnNews.left(), btnNews.bottom()+GAP, btnRankings.width(), BTN_HEIGHT);
+			btnSettings.setRect(btnNews.left(), btnNews.bottom()+GAP, (btnPlay.width()/3f)-1, BTN_HEIGHT);
 			btnAbout.setRect(btnSettings.right()+2, btnSettings.top(), btnSettings.width(), BTN_HEIGHT);
+			btnPreview.setRect(btnAbout.right()+2, btnSettings.top(), btnSettings.width(), BTN_HEIGHT);
 		}
 
 		version = new BitmapText( "v" + Game.version, pixelFont);
@@ -322,6 +334,7 @@ public class TitleScene extends PixelScene {
 		btnChanges.enable(alpha != 0);
 		btnSettings.enable(alpha != 0);
 		btnAbout.enable(alpha != 0);
+		btnPreview.enable(alpha != 0);
 
 		btnPlay.alpha(alpha);
 		btnSupport.alpha(alpha);
@@ -331,6 +344,7 @@ public class TitleScene extends PixelScene {
 		btnChanges.alpha(alpha);
 		btnSettings.alpha(alpha);
 		btnAbout.alpha(alpha);
+		btnPreview.alpha(alpha);
 
 		version.alpha(alpha);
 		btnFade.icon().alpha(alpha);
