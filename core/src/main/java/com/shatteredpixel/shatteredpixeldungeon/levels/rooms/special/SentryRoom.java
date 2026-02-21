@@ -397,9 +397,11 @@ public class SentryRoom extends SpecialRoom {
 			super.link(ch);
 
 			chargeParticles = centerEmitter();
-			chargeParticles.autoKill = false;
-			chargeParticles.pour(MagicMissile.MagicParticle.ATTRACTING, 0.05f);
-			chargeParticles.on = false;
+			if (chargeParticles != null) {
+				chargeParticles.autoKill = false;
+				chargeParticles.pour(MagicMissile.MagicParticle.ATTRACTING, 0.05f);
+				chargeParticles.on = false;
+			}
 
 			if (((Sentry)ch).curChargeDelay != ((Sentry) ch).initialChargeDelay){
 				play(charging);

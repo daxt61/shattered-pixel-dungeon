@@ -1162,11 +1162,15 @@ public class GameScene extends PixelScene {
 	}
 	
 	public static void add( EmoIcon icon ) {
-		scene.emoicons.add( icon );
+		if (scene != null && scene.emoicons != null) {
+			scene.emoicons.add(icon);
+		}
 	}
 	
 	public static void add( CharHealthIndicator indicator ){
-		if (scene != null) scene.healthIndicators.add(indicator);
+		if (scene != null && scene.healthIndicators != null) {
+			scene.healthIndicators.add(indicator);
+		}
 	}
 	
 	public static void add( CustomTilemap t, boolean wall ){
@@ -1197,11 +1201,15 @@ public class GameScene extends PixelScene {
 	}
 	
 	public static synchronized SpellSprite spellSprite() {
-		return (SpellSprite)scene.spells.recycle( SpellSprite.class );
+		if (scene != null && scene.spells != null) {
+			return (SpellSprite) scene.spells.recycle(SpellSprite.class);
+		} else {
+			return null;
+		}
 	}
 	
 	public static synchronized Emitter emitter() {
-		if (scene != null) {
+		if (scene != null && scene.emitters != null) {
 			Emitter emitter = (Emitter)scene.emitters.recycle( Emitter.class );
 			emitter.revive();
 			return emitter;
@@ -1211,7 +1219,7 @@ public class GameScene extends PixelScene {
 	}
 
 	public static synchronized Emitter floorEmitter() {
-		if (scene != null) {
+		if (scene != null && scene.floorEmitters != null) {
 			Emitter emitter = (Emitter)scene.floorEmitters.recycle( Emitter.class );
 			emitter.revive();
 			return emitter;
@@ -1221,7 +1229,7 @@ public class GameScene extends PixelScene {
 	}
 	
 	public static FloatingText status() {
-		return scene != null ? (FloatingText)scene.statuses.recycle( FloatingText.class ) : null;
+		return (scene != null && scene.statuses != null) ? (FloatingText)scene.statuses.recycle( FloatingText.class ) : null;
 	}
 	
 	public static void pickUp( Item item, int pos ) {
